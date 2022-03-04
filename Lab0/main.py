@@ -49,13 +49,33 @@ if GausianElimantion:
         print(solution)
 
 if GausianJordanElimination:
-    q = 0.2
-    solution = np.zeros(rows)
+    for q in np.arange(0.2, 5.0, 0.15):
+        solution = np.zeros(rows)
 
-    matrix_A = [
-                [2*q*pow(10, -4), 1, 6, 9, 10, 10],
-                [2*pow(10, -4), 1, 6, 9, 10, 2],
-                [1,6,6,8,6,9],
-                [5,9,10,7,10, 9],
-                [3,4,9,7,9, 3]
-                ]
+        matrix_A = [
+                    [2*q*pow(10, -4), 1, 6, 9, 10, 10],
+                    [2*pow(10, -4), 1, 6, 9, 10, 2],
+                    [1,6,6,8,6,9],
+                    [5,9,10,7,10, 9],
+                    [3,4,9,7,9, 3]
+                    ]
+
+        for i in range(rows):
+
+            temp1 = matrix_A[i][i]
+
+            for k in range(rows + 1):
+                matrix_A[i][k] =matrix_A[i][k] / temp1
+
+            for j in range(rows):
+                if i != j:
+                    temp2= matrix_A[j][i]
+
+                    for k in range(rows+1):
+                        matrix_A[j][k] = round(matrix_A[j][k] - temp2 * matrix_A[i][k], 5)
+
+
+        for i in range(rows):
+            solution[i] = matrix_A[i][rows]/matrix_A[i][i]
+
+        print(solution)
