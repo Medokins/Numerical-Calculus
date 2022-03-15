@@ -22,12 +22,12 @@ def printMatrix(matrix):
         print("\n")
 
 
-def luDecomposition(mat, n):  # mat to macierz, n to rozmiar
+def luDecomposition(mat, n):  #Mat is matrix, N is size
 
-    lower = np.identity(n)  # macierz jednostkowa
+    lower = np.identity(n)
     upper = mat
 
-    # GÃ³rna
+    # Upper
     for i in range(n):
         for j in range(i+1, size):
             l = upper[j][i]/upper[i][i]
