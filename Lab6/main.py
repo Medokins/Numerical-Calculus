@@ -7,6 +7,9 @@ a_4 = 1 + 0j
 vector_a = [a_0, a_1, a_2, a_3, a_4]
 alpha_max = 10e-10
 IT_MAX = 20
+N = 4
+z0 = 0 + 0j
+z1 = 0.1 + 0.1j
 
 def calculate_b(A, z):
   b = [0 + 0j, 0 + 0j, 0 + 0j, 0 + 0j, 0 + 0j]
@@ -20,13 +23,16 @@ def calculate_R(A, z):
 def calculate_z(current_z, previous_z, current_R, previous_R):
     return current_z - (current_R*(current_z - previous_z) / (current_R - previous_R))
 
-z = [0 +0j, 0 +0j, 0 +0j] #z[0] previous, z[1] current, z[2] next
-r = [0 +0j, 0 +0j, 0 +0j] #r[0] previous, r[1] current, r[2] next
-for l in range(1):
+for l in range(1, N + 1):
+  z = [0 +0j, 0 +0j, 0 +0j] #z[0] previous, z[1] current, z[2] next
+  r = [0 +0j, 0 +0j, 0 +0j] #r[0] previous, r[1] current, r[2] next
+  iterations = 0
   for j in range(IT_MAX):
+
+    iterations = j
     if(j == 0):
-      z[0] = 0
-      z[1] = 1
+      z[0] = z0
+      z[1] = z1
       r[0] = calculate_R(vector_a, z[0])
       r[1] = calculate_R(vector_a, z[1])
 
@@ -40,6 +46,6 @@ for l in range(1):
     r[0] = r[1]
     r[1] = r[2]
 
-  a = calculate_b(vector_a, z[1])
+  vector_a = calculate_b(vector_a, z[1])
 
-print(z)
+  print(f"{l}: Re: {z[1].real}, : Im: {z[1].imag}, Iterations : {iterations}")
