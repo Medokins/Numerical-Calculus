@@ -8,8 +8,8 @@ vector_a = [a_0, a_1, a_2, a_3, a_4]
 alpha_max = 10e-10
 IT_MAX = 20
 N = 4
-z0 = 0 + 0j
-z1 = 0.1 + 0.1j
+z0 = 5 + 5j
+z1 = 5.1 + 5.1j
 
 def calculate_b(A, z):
   b = [0 + 0j, 0 + 0j, 0 + 0j, 0 + 0j, 0 + 0j]
