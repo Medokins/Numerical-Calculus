@@ -1,10 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sqlalchemy import true
 
-N = 5
+N = 20
 f = np.zeros((N+1,N+1))
 x_min = -5
 x_max = 5
+optimized = true
 
 def printArray(arrayToPrint, N):
     for i in range(N+1):
@@ -12,10 +14,16 @@ def printArray(arrayToPrint, N):
             print(round(arrayToPrint[i][j], 5), end="   ")
         print("\n")
 
-def set_x(n, min, max):
-    step = (max-min)/(n)
-    x = [min+(step*i) for i in range(n+1)]
-    return x
+if optimized:
+    def set_x(n, min, max): #otpimized
+        x = [1/2 * ((min - max)*np.cos(np.pi* (2*i +1 ) / (2*n + 2) ) + (min + max)) for i in range(n+1)]
+        return x
+else:
+    def set_x(n, min, max): #unoptimized
+        step = (max-min)/(n)
+        x = [min+(step*i) for i in range(n+1)]
+        return x
+
 
 def set_y(vector_x):
     y = [(1/(1+(x*x))) for x in vector_x]
@@ -48,10 +56,14 @@ rightArray = createRightArray(f, N, x)
 
 x_points = []
 y_points = []
+function_x_points = []
 
 for x in np.arange(-5, 5, 0.1):
+    function_x_points.append(x)
     x_points.append(x)
     y_points.append(newton(x, rightArray, set_x(N, x_min, x_max)))
+function_y_points = set_y(function_x_points)
 
-plt.plot(x_points, y_points, color="red")
+plt.plot(function_x_points, function_y_points, color = "red")
+plt.plot(x_points, y_points)
 plt.show()
