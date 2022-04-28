@@ -1,12 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from sqlalchemy import true
 
 N = 20
 f = np.zeros((N+1,N+1))
 x_min = -5
 x_max = 5
-optimized = true
+optimized = True
 
 def printArray(arrayToPrint, N):
     for i in range(N+1):
