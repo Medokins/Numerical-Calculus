@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-m = 0
-k = 1
+m = 5
+k = 5
 n = 30
 # range of Integral
 a = 0
